@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -23,7 +24,14 @@ namespace netcoredemo.Controllers
             //HttpContext.Session.SetInt32("age", 20);
             //int? age = HttpContext.Session.GetInt32("age");
             //return Content("hello " + value);
-            return View();
+            UserModel model = new UserModel()
+            {
+                UserName = "test",
+                TrueName = "王五",
+                Telephone = "13816728987"
+            };
+            return View(model);
+
 
         }
         public IActionResult PostSayHello([FromQuery] string name)
@@ -44,6 +52,8 @@ namespace netcoredemo.Controllers
 
         public IActionResult ShowView()
         {
+            ViewBag.UserName = "张三";
+            ViewBag.UserName1 = "李四";
             ViewData["IntTestData"] = 100;
             ViewData["StringTestData"] = "这是一个字符串";
 
@@ -60,7 +70,30 @@ namespace netcoredemo.Controllers
 
         //public Task<IActionResult> Test() {
         //    //io操作
-            
+
         //}
+
+        public IActionResult CheckUser(string username, string password, string username1, string password1) {
+            //return Content("用户名 " + username
+            //    + ";密码 " + password
+            //    + ";用户名1 " + username1
+            //    + ";密码2 " + password1);
+            return Content($"用户名{username};密码{password};用户名1{username1};密码1{password1}");
+        }
+
+        public class UserModel {
+            [DisplayName("用户名")]
+            public string UserName {
+                get; set;
+            }
+            [DisplayName("真实姓名")]
+            public string TrueName {
+                get; set;
+            }
+            [DisplayName("电话")]
+            public string Telephone {
+                get; set;
+            }
+        }
     }
 }

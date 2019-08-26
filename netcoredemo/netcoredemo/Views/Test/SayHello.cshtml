@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model netcoredemo.Controllers.TestController.UserModel
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -25,5 +26,21 @@
                 })
             }
         </script>
+        <table>
+            <tr>
+                <td>@Html.LabelFor(m=>m.UserName)</td>
+                <td>
+                @Html.TextBoxFor(m=>m.UserName)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.TrueName)</td>
+                <td>@Model.TrueName</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Telephone)</td>
+                <td>@Model.Telephone</td>
+            </tr>
+        </table>
     </body>
 </html>
