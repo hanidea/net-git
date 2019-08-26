@@ -26,7 +26,7 @@ namespace netcoredemo.Controllers
             return View();
 
         }
-        public IActionResult PostSayHello(string name)
+        public IActionResult PostSayHello([FromQuery] string name)
         {
             return Content("hello " + name);
         }
@@ -35,5 +35,21 @@ namespace netcoredemo.Controllers
         {
             return Content("hello " + username);
         }
+
+        public IActionResult ReturnJson() {
+            //JsonResult result = new JsonResult(new { username = "zhangsan" });
+            //return result;
+            return Json(new { username="lisi"});
+        }
+
+        public IActionResult ShowView()
+        {
+            return View();
+        }
+
+        //public Task<IActionResult> Test() {
+        //    //io操作
+            
+        //}
     }
 }
