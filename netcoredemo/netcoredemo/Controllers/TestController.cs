@@ -95,5 +95,9 @@ namespace netcoredemo.Controllers
                 get; set;
             }
         }
+
+        public IActionResult TestPart() {
+            return PartialView("~/Views/Shared/MyPartialView.cshtml");
+        }
     }
 }
