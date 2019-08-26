@@ -44,6 +44,17 @@ namespace netcoredemo.Controllers
 
         public IActionResult ShowView()
         {
+            ViewData["IntTestData"] = 100;
+            ViewData["StringTestData"] = "这是一个字符串";
+
+            ViewBag.IntTestData = 500;
+            ViewBag.StringTestData = "这是ViewBag中的字符串";
+            //传递列表数据
+            List<string> lsData = new List<string>();
+            lsData.Add("第一行数据");
+            lsData.Add("第二行数据");
+            lsData.Add("第三行数据");
+            ViewBag.ListData = lsData;
             return View();
         }
 
