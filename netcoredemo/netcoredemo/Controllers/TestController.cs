@@ -14,24 +14,26 @@ namespace netcoredemo.Controllers
         // GET: /<controller>/
         public IActionResult SayHello()
         {
-            string value = Request.Query["name"];
-            //Request.Form[""]
-            //Request.Cookies[""]
-            HttpContext.Session.SetString("name", "lisi");
-            HttpContext.Session.Remove("name");
-            string name = HttpContext.Session.GetString("name");
-            HttpContext.Session.SetInt32("age", 20);
-            int? age = HttpContext.Session.GetInt32("age");
-            return Content("hello " + value);
+            //string value = Request.Query["name"];
+            ////Request.Form[""]
+            ////Request.Cookies[""]
+            //HttpContext.Session.SetString("name", "lisi");
+            //HttpContext.Session.Remove("name");
+            //string name = HttpContext.Session.GetString("name");
+            //HttpContext.Session.SetInt32("age", 20);
+            //int? age = HttpContext.Session.GetInt32("age");
+            //return Content("hello " + value);
+            return View();
 
         }
-        public IActionResult SayHello1(TestModel model)
+        public IActionResult PostSayHello(string name)
         {
-            return Content("hello " + model.Name);
+            return Content("hello " + name);
         }
-        public class TestModel
+
+        public IActionResult PostHeader([FromHeader]string username)
         {
-            public string Name { get; set; }
+            return Content("hello " + username);
         }
     }
 }

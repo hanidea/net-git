@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>SayHello</title>
+        <script scr="/lib/jquery/dist/query.min.js"></script>
+    </head>
+    <body>
+        <form method="post" action="/test/postsayhello?name=zhangsan">
+            姓名:<input type="text" name="name"/>
+            <input type="submit" value="提交"/>
+            <input type="button" value="提交带header数据" onclick="postheader()"/>
+        </form>
+        <script type="text/javascript">
+            function postheader(){
+                $.ajax({
+                    url:"/test/PostHeader?r="+Math.random(),
+                    beforeSend: function(xhr){
+                        xhr.setRequestHeader("username","qwerty")
+                    },
+                    type:"get",
+                    success: function(data){
+                        alert(data);
+                    }
+                })
+            }
+        </script>
+    </body>
+</html>
