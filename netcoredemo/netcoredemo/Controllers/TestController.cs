@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using netcoredemo.Models;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,14 +36,51 @@ namespace netcoredemo.Controllers
 
 
         }
+        private readonly IMemoryCache _cache;
+
+        public TestController(IMemoryCache cache) {
+            _cache = cache;
+        }
         public IActionResult Index()
         {
-            TempData["username"] = "only你";
+            //TempData["username"] = "only你";
+            ISession session = HttpContext.Session;
+            session.SetInt32("age",30);
+            session.SetString("realname", "杜");
+
+            //依赖注入的方式去获取
+            _cache.Set("age", 37);
+            _cache.Set("realname", "张");
+
+
             return View();
         }
         public IActionResult Read() {
+            //ISession session = HttpContext.Session;
+            //int? age = session.GetInt32("age");
+            //if (age.HasValue) {
+            //    ViewBag.age = age;
+            //}
+            //string realname = session.GetString("realname");
+            //ViewBag.realname = realname;
+
+            //获取cache数据
+            int age = _cache.Get<int>("age");
+            string realname = _cache.Get<string>("realname");
+            ViewBag.realname = realname;
+            ViewBag.age = age;
             return View();
         }
+
+        public IActionResult PostData(UserInfo userInfo)
+        {
+            return Content(ModelState.IsValid ? "数据有效" : "数据无效");
+            //if (ModelState.IsValid) {
+            //    return Content("数据有效");
+            //}
+            //return Content("数据无效");
+        }
+
         public IActionResult PostSayHello([FromQuery] string name)
         {
             return Content("hello " + name);

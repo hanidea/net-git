@@ -8,9 +8,11 @@ using netcoredemo.Models;
 
 namespace netcoredemo.Controllers
 {
+    [Route("admin/home")]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        [Route("index")]
+        public IActionResult Index(string controller,string action,[FromRoute] int? id)
         {
             return View();
         }
