@@ -34,6 +34,14 @@ namespace netcoredemo.Controllers
 
 
         }
+        public IActionResult Index()
+        {
+            TempData["username"] = "only你";
+            return View();
+        }
+        public IActionResult Read() {
+            return View();
+        }
         public IActionResult PostSayHello([FromQuery] string name)
         {
             return Content("hello " + name);
